@@ -1,0 +1,103 @@
+#include "usbd_driver.h"
+
+void init_usb_pins() {
+	// All USB pins are in GPIO-B
+	// Enable GPIOB clock
+	SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);
+
+	// Set alt fn 12 for PB14 (D-), PB15 (D+)
+	MODIFY_REG(GPIOB->AFR[1],
+			   GPIO_AFRH_AFSEL14 | GPIO_AFRH_AFSEL15,
+			   _VAL2FLD(GPIO_AFRH_AFSEL14, 0xC) | _VAL2FLD(GPIO_AFRH_AFSEL15, 0xC)
+	);
+
+	// Configure the pins to work in alt fn mode
+	MODIFY_REG(GPIOB->MODER,
+			   GPIO_MODER_MODER14 | GPIO_MODER_MODER15,
+			   _VAL2FLD(GPIO_MODER_MODER14, 2) | _VAL2FLD(GPIO_MODER_MODER15, 2)
+	);
+}
+
+
+void init_usb_core() {
+	//Enable clock for USB core
+	SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_OTGHSEN);
+
+	//Config the USB core to - run in Device mode, use embedded PHY, config turnaround time
+	MODIFY_REG(USB_OTG_HS->GUSBCFG,
+		USB_OTG_GUSBCFG_FDMOD | USB_OTG_GUSBCFG_PHYSEL | USB_OTG_GUSBCFG_TRDT,
+		USB_OTG_GUSBCFG_FDMOD | USB_OTG_GUSBCFG_PHYSEL | _VAL2FLD(USB_OTG_GUSBCFG_TRDT, 0x09)
+	);
+
+	//Config the device to run in FS
+	MODIFY_REG(USB_OTG_HS_DEVICE->DCFG,
+		USB_OTG_DCFG_DSPD,
+		_VAL2FLD(USB_OTG_DCFG_DSPD, 0x03)
+	);
+
+	//Enable VBUS sensing
+	SET_BIT(USB_OTG_HS->GCCFG, USB_OTG_GCCFG_VBUSBSEN);
+
+	//Clear all pending interrupts if any are set before unmasking.
+	//Ref Manual: The application must clear the OTG_HS_GINTSTS register at initialization before
+	//unmasking the interrupt bit to avoid any interrupts generated prior to initialization.
+	WRITE_REG(USB_OTG_HS->GINTSTS, 0xFFFFFFFF);
+
+	//Unmask the main USB core interrupts - these will notify us in different situations.
+	//Most important and common interrupts that might be used:
+	//1. When a reset signal is detected on the bus
+	//2. When enumeration of device speed is done
+	//3. When SOF is detected
+	//4. When USB suspend signal is detected
+	//5. When WakeUp - Resume/Remote wakeup is detected. WUIM - WakeUp Intr Mask
+	//6. When an intr is raised on an IN EP
+	//7. When an intr is raised on an OUT EP
+	//8. When there is data in RXFIFO ready to be read
+	SET_BIT(USB_OTG_HS->GINTMSK,
+		USB_OTG_GINTMSK_USBRST | USB_OTG_GINTMSK_ENUMDNEM | USB_OTG_GINTMSK_SOFM |
+		USB_OTG_GINTMSK_USBSUSPM | USB_OTG_GINTMSK_WUIM | USB_OTG_GINTMSK_IEPINT |
+		USB_OTG_GINTSTS_OEPINT | USB_OTG_GINTMSK_RXFLVLM
+	);
+
+	//Unmask USB global intr which will activate all unmasked intrs
+	SET_BIT(USB_OTG_HS->GAHBCFG, USB_OTG_GAHBCFG_GINT);
+}
+
+
+void usbd_connect_to_bus() {
+	// Power the transceivers on
+    SET_BIT(USB_OTG_HS->GCCFG, USB_OTG_GCCFG_PWRDWN);
+
+	// Connect the device to the bus
+    CLEAR_BIT(USB_OTG_HS_DEVICE->DCTL, USB_OTG_DCTL_SDIS);
+}
+
+
+void usbd_disconnect_from_bus() {
+	// Disconnect the device from the bus
+	SET_BIT(USB_OTG_HS_DEVICE->DCTL, USB_OTG_DCTL_SDIS);
+
+	// Power the transceivers off
+	CLEAR_BIT(USB_OTG_HS->GCCFG, USB_OTG_GCCFG_PWRDWN);
+}
+
+
+static void config_EP0(uint8_t endpoint_size) {
+	//endpoint_size = max pkt size for Control transfer that the EP0 will do
+	//In FS USB device, endpoint_size = 8/16/32/64 Bytes
+	//For HS USB device, endpoint_size = 64 Bytes
+}
+
+
+static void usb_reset_handler() {
+
+}
+
+void usb_gintsts_handler(void) {
+	volatile uint32_t gintsts = USB_OTG_HS_GLOBAL->GINTSTS;
+
+
+}
+
+
+

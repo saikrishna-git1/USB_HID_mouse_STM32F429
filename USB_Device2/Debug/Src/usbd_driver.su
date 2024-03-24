@@ -1,0 +1,4 @@
+../Src/usbd_driver.c:3:6:init_usb_pins	4	static
+../Src/usbd_driver.c:22:6:init_usb_core	4	static
+../Src/usbd_driver.c:67:6:usbd_connect_to_bus	4	static
+../Src/usbd_driver.c:76:6:usbd_disconnect_from_bus	4	static

@@ -1,0 +1,14 @@
+16:52:45 **** Incremental Build of configuration Debug for project USB_Device2 ****
+make -j4 all 
+arm-none-eabi-size  USB_Device2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5620	    104	   1904	   7628	   1dcc	USB_Device2.elf
+Finished building: default.size.stdout
+ 
+16:53:59 **** Incremental Build of configuration Debug for project USB_Device2 ****
+make -j4 all 
+arm-none-eabi-size  USB_Device2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5620	    104	   1904	   7628	   1dcc	USB_Device2.elf
+Finished building: default.size.stdout
+ 
