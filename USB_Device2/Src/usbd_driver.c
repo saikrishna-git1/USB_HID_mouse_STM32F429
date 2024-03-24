@@ -87,11 +87,27 @@ static void config_EP0(uint8_t endpoint_size) {
 	//In FS USB device, endpoint_size = 8/16/32/64 Bytes
 	//For HS USB device, endpoint_size = 64 Bytes
 
+	//Unmask all ingtrs of IN and OUT EPs
+	SET_BIT(USB_OTG_HS_DEVICE->DAINTMSK, 1 << 0 | 1 << 16);
+
+	// Configures the maximum packet size, activates the endpoint, and NAK the endpoint (cannot send data yet).
+	// max_pkt_size is same for Control IN and OUT EP0. Read rm again for clarity ----
+	MODIFY_REG(IN_ENDPOINT(0)->DIEPCTL,
+		USB_OTG_DIEPCTL_MPSIZ,
+		USB_OTG_DIEPCTL_USBAEP | _VAL2FLD(USB_OTG_DIEPCTL_MPSIZ, endpoint_size) | USB_OTG_DIEPCTL_SNAK
+	);
+
+	SET_BIT(OUT_ENDPOINT(0)->DOEPCTL,
+		USB_OTG_DOEPCTL_EPENA | USB_OTG_DOEPCTL_CNAK
+	);
 }
 
 
 static void usb_reset_handler() {
 
+	for (uint8_t i = 0; i <= ENDPOINT_COUNT; i++) {
+
+	}
 }
 
 void usb_gintsts_handler(void) {
