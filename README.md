@@ -1,11 +1,11 @@
-USB 2.0 speeds - HS - 480Mbps  
+## USB 2.0 speeds - HS - 480Mbps  
 Bit stuffing - insetion of non-info bits into the data. In USB HS/FS insert a 0 after 6 consecutive 1s.  
 
-USB Host controllers: USB 2.0 - EHCI  
+## USB Host controllers: USB 2.0 - EHCI  
 
-Frames:  
+## Frames
 Additional method to keep the bus in sync is grouping the signals on the bus into frames or let's say grouping the packets into frames.  
-Every frame is determined simply by a start of frame s or F signal on the bus. Here on this diagram or in this figure, we can see this is o f or start of frame signal is sent 
+Every frame is determined simply by a start of frame SOF signal on the bus. Here on this diagram or in this figure, we can see this SOF or start of frame signal is sent 
 every 1 millisecond in full speed USB devices.
 Every USB device connected to the to the bus is allowed to use a specific portion of the frame.
 For example, if we have a USB mouse, a USB keyboard and a USB camera connected to our PC.
