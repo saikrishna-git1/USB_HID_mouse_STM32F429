@@ -79,8 +79,13 @@ The type of a pkt depends on its content and purpose.
 Basically we have 3 (+1) types of packets:  
   
 SOF pkt (Start Of Frame pkt):  
-This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started.  
+This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started. SOF signal is sent every 1 millisecond in full speed USB devices.  
   
 Don't get confused between SOF pkt and SOP (Sync) signal.  
 SOP (Sync) signal is a sequence of J,K bus states to tell that a new pkt will be sent now. SOP is the first field in any pkt including SOF pkt.  
 SOF is a pkt that contains meaningful data.  
+
+
+
+
+
