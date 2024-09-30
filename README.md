@@ -2,6 +2,20 @@
 Hot pluggable - plug and play  
 Self configured  
 Some devices are dorectly bus-powered  
+USB is Host-controlled - single Host per bus  
+Every USB product is programmed to have a vendor ID and product ID (VID/PID)  
+A uniques address is assigned by the Host to the device during device enumeration (initial negotiation/recognition). This address will change everytime you disconnect and reconnect the device to the Host.  
+USB is a polled bus - the bus gets frequently sampled by both Host and devices without including any interrupt mechanism in the USB controller. And according to the state found on the bus after sampling the bus, specific actions or events happen.  
+
+
+## Power delivery specs
+VBUS voltage normally = ~5V
+Bus powered (VBUS)
+USB2.0 - upto 500mA
+USB3.X - upto 900mA  
+
+USB bus powered devices can draw power from the bus depending on the state of the USB device:  
+Not configured, Configured, Suspended(Idle)  
 
 
 ## USB 2.0 speeds - HS - 480Mbps  
