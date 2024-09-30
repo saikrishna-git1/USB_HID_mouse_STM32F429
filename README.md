@@ -4,6 +4,7 @@ Bit stuffing - insetion of non-info bits into the data. In USB HS/FS insert a 0 
 ## USB Host controllers: USB 2.0 - EHCI  
 
 ## Frames
+We already saw some techniques used to keep the bus in sync, namely bit stuffing and NRZI encoding.
 Additional method to keep the bus in sync is grouping the signals on the bus into frames or let's say grouping the packets into frames.  
 Every frame is determined simply by a start of frame SOF signal on the bus. Here on this diagram or in this figure, we can see this SOF or start of frame signal is sent 
 every 1 millisecond in full speed USB devices.
