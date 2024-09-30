@@ -120,6 +120,20 @@ This pkt is sent to tell the status of a previous pkt (typically Data pkt).
 
 
 ### USB transaction
+A single USB transaction simply means a fully completed transaction between Host and device.  
+  
+A transaction consists of a sequence of 2/3 pkts:  
+1. Token pkt - tells who sent or who should receive a Data pkt.  
+2. Data pkt - actual data.  
+3. Handshake pkt (not used in Isochronous transfers) - tells if the data was successfully received or not.
+
+
+
+  
+
+
+
+
 
 
 
