@@ -24,6 +24,9 @@ Bit stuffing - insetion of non-info bits into the data. In USB HS/FS insert a 0 
 ## USB Host controllers: USB 2.0 - EHCI  
 
 ## Frames
+The time between 2 SOF signals is called a Frame.  
+SOF Data SOF Data  
+SOF is used to keep data on the bus in sync.  
 We already saw some techniques used to keep the bus in sync, namely bit stuffing and NRZI encoding.
 Additional method to keep the bus in sync is grouping the signals on the bus into frames or let's say grouping the packets into frames.  
 Every frame is determined simply by a start of frame SOF signal on the bus. Here on this diagram or in this figure, we can see this SOF or start of frame signal is sent 
@@ -59,9 +62,22 @@ Now let's summarize a bit.
 The very simple intuition behind endpoints is every endpoint will be responsible for sending or receiving
 data related to a specific functionality in the USB device.
   
+In endpoint and out endpoint are totally two different endpoints.
+I excluded endpoint zero. This sentence is not totally correct for endpoint zero because you can't configure the endpoint zero as freely as the other endpoints, but we will see that later.
 
 
+## Packets
+A pkt is the smallest unit of data txed in USB. The bytes of a pkt are txed LSB first.  
+Pkt fields:  
+Sync (SOP) ... Data ... EOP   
+... - metadata about the data(payload) and the pkt itself.    
 
 
+## Packet types and fields
+The type of a pkt depends on its content and purpose.  
+Basically we have 3 (+1) types of packets:  
+  
+SOF pkt (Start Of Frame pkt):  
+This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started.  
 
 
