@@ -26,7 +26,7 @@ Bit stuffing - insetion of non-info bits into the data. In USB HS/FS insert a 0 
 ## Frames
 The time between 2 SOF signals is called a Frame.  
 SOF Data SOF Data  
-SOF is used to keep data on the bus in sync.  
+SOF is used to keep data on the bus in sync. This should not be confused with SOP (Sync) field, which is the first field in every pkt.  
 We already saw some techniques used to keep the bus in sync, namely bit stuffing and NRZI encoding.
 Additional method to keep the bus in sync is grouping the signals on the bus into frames or let's say grouping the packets into frames.  
 A Frame consists of multiple pkts.  
