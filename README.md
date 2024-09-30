@@ -38,3 +38,9 @@ This is because every single device has a specific minimum portion in every sing
 So this means frames help to divide the bandwidth of the bus between the connected devices.
 
 I will repeat this example again later and talk about it in more details when we talk about USB bandwidth allocation or management.
+
+
+
+## Endpoints
+This topic is tightly related to USB firmware development.  
+
