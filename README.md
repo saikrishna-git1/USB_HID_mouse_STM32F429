@@ -69,7 +69,7 @@ I excluded endpoint zero. This sentence is not totally correct for endpoint zero
 
 ## Packets
 A pkt is the smallest unit of data txed in USB. Packets are grouped into Frames (see above). The bytes of a pkt are txed LSB first.  
-Every pkt should start with a SOP (Sync) field.  
+Every pkt should start with a SOP (Sync) field and should end with EOP field.  
 Pkt fields:  
 Sync (SOP) ... Data ... EOP   
 ... - metadata about the data(payload) and the pkt itself.    
