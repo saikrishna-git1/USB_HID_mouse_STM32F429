@@ -66,6 +66,7 @@ data related to a specific functionality in the USB device.
 In endpoint and out endpoint are totally two different endpoints.
 I excluded endpoint zero. This sentence is not totally correct for endpoint zero because you can't configure the endpoint zero as freely as the other endpoints, but we will see that later.
 
+## For packets and Transaction types - see printout
 
 ## Packets
 A pkt is the smallest unit of data txed in USB. Packets are grouped into Frames (see above). The bytes of a pkt are txed LSB first.  
@@ -123,7 +124,7 @@ This pkt is sent to tell the status of a previous pkt (typically Data pkt).
 A single USB transaction simply means a fully completed transaction between Host and device.  
   
 A transaction consists of a sequence of 2/3 pkts:  
-1. Token pkt - tells who sent or who should receive a Data pkt.  
+1. Token pkt - first pkt is every USB transaction. Tells who sent or who should receive a Data pkt.  
 2. Data pkt - actual data.  
 3. Handshake pkt (not used in Isochronous transfers) - tells if the data was successfully received or not (status of the transaction).
   
