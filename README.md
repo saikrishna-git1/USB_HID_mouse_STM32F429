@@ -1,3 +1,9 @@
+## USB main features
+Hot pluggable - plug and play
+Self configured
+Some devices are dorectly bus-powered
+
+
 ## USB 2.0 speeds - HS - 480Mbps  
 Bit stuffing - insetion of non-info bits into the data. In USB HS/FS insert a 0 after 6 consecutive 1s.  
 
