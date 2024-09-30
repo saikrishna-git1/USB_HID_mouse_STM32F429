@@ -81,17 +81,21 @@ Basically we have 3 (+1) types of packets:
   
 ### SOF pkt (Start Of Frame pkt):  
 <Idle> Sync, PID, FrameNo., CRC5, EOP <Idle>  
+PID -   
+FrameNo. - current Frame number. It is just an incrementing number.  
+CRC5 - error detection.  
 This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started. SOF signal is sent every 1 millisecond in full speed USB devices.  
+
   
 Don't get confused between SOF pkt and SOP (Sync) signal.  
 SOP (Sync) signal is a sequence of J,K bus states to tell that a new pkt will be sent now. SOP is the first field in any pkt including SOF pkt.  
 SOF is a pkt that contains meaningful data.  
-
-SOF pkt is a part of Token pkt ???  
+SOF pkt is sent periodically to keep the data in the bus in sync. But we (firmware engrs) will not be dealing with it. Hardware uses it to keep everything in sync.  
+SOF pkt is actually a part of Token pkt ???  Token pkt, Data pkt, Handshake pkt are the 3 major types of pkts ???  
 
 
 ### Token pkt
-
+<Idle> Sync, PID, Addr, EP, CRC5, EOP <Idle>
 
 
 
