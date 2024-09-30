@@ -84,6 +84,7 @@ Basically we have 3 (+1) types of packets:
 PID -   
 FrameNo. - current Frame number. It is just an incrementing number.  
 CRC5 - error detection.  
+   
 This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started. SOF signal is sent every 1 millisecond in full speed USB devices.  
 
   
@@ -95,7 +96,34 @@ SOF pkt is actually a part of Token pkt ???  Token pkt, Data pkt, Handshake pkt 
 
 
 ### Token pkt
-<Idle> Sync, PID, Addr, EP, CRC5, EOP <Idle>
+<Idle> Sync, PID, Addr, EP, CRC5, EOP <Idle>  
+Addr - device address to identify the deivce in case multiple devices are connected to the bus. To identify to/from which device this pkt and the following pkts are being sent.  
+EP -  to/from the EP of the device which has the Addr, this pkt and the following pkt(s) are being sent.   
+  
+This is a Token pkt. This contains info not only abut itself but also about the pkt(s) that follow it.  
+We will understand more clearly when we go through USB transactions.  
+
+
+
+### Data pkt
+<Idle> Sync, PID, Data, CRC16, EOP <Idle>  
+
+The actual data/payload to be txed.  
+
+
+
+### Handshake pkt
+<Idle> Sync, PID, EOP <Idle>  
+
+This pkt is sent to tell the status of a previous pkt (typically Data pkt).
+
+
+
+### USB transaction
+
+
+
+
 
 
 
