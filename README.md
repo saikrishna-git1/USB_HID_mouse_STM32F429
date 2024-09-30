@@ -43,4 +43,25 @@ I will repeat this example again later and talk about it in more details when we
 
 ## Endpoints
 This topic is tightly related to USB firmware development.  
+Only on devices not Host. An end point is a logical entity that can be seen as data center or as data receiver related to a specific functionality. This depends, of course, on the end point type or let's say more simply, it depends on the direction of the data - Do we want to send some data to the host or do we want to receive data from the host?  
+Or we can say an end point can be seen as a buffer or temporary data storage until the data is consumed by the host or by the device, depending on the direction of the data.  
+Evevry device has multiple endpoints.  
+Every EP has a direction depending on the direction of the data. The direction of EP is named from the Host's perspective:  
+If data flows out of device into the Host, it is IN EP and the data is IN data. Similarly, if the data flows from Host to a device EP, it is OUT EP and the data is OUT data.  
+IN: device to Host  
+OUT: Host to device  
+
+Devices can have upto 16 IN and 16 OUT EPs.  
+IN EP-2 means EP-2 that sends data from device to Host.  
+Actually the phrase or the term that 'an endpoint sends data to the host' is not very accurate. Actually, in endpoints, simply put, the data available on the bus and the host fetches the data whenever it needs them. But let's keep the things simple now. It's a very, very, very important idea.  
+
+Now let's summarize a bit.
+The very simple intuition behind endpoints is every endpoint will be responsible for sending or receiving
+data related to a specific functionality in the USB device.
+  
+
+
+
+
+
 
