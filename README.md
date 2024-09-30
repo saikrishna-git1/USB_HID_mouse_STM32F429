@@ -68,6 +68,7 @@ I excluded endpoint zero. This sentence is not totally correct for endpoint zero
 
 ## Packets
 A pkt is the smallest unit of data txed in USB. Packets are grouped into Frames (see above). The bytes of a pkt are txed LSB first.  
+Every pkt should start with a SOP (Sync) field.  
 Pkt fields:  
 Sync (SOP) ... Data ... EOP   
 ... - metadata about the data(payload) and the pkt itself.    
@@ -79,5 +80,7 @@ Basically we have 3 (+1) types of packets:
   
 SOF pkt (Start Of Frame pkt):  
 This is not really a type of pkt, even though it gets mentioned as a type coz it has a special usage. Remember we already talked about Frames earlier. SOF simply tells when a new Frame has started.  
-
-
+  
+Don't get confused between SOF pkt and SOP (Sync) signal.  
+SOP (Sync) signal is a sequence of J,K bus states to tell that a new pkt will be sent now. SOP is the first field in any pkt including SOF pkt.  
+SOF is a pkt that contains meaningful data.  
