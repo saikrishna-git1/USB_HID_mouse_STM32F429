@@ -1,3 +1,8 @@
+## Steps to check if device is connecting to the bus:
+1. In Raspberry Pi terminal, type the following command: sudo tail -f /var/log/syslog
+2. Run the USB code on the STM microcontroller. The linux host should recognize the USB device with the message: "new full-speed device ...". There might be device descriptor error if you have not supplied any descriptor yet in the code.
+
+
 ## USB main features
 Hot pluggable - plug and play  
 Self configured  
